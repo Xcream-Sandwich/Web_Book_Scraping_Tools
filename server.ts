@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import * as cheerio from "cheerio";
 
 const app = express();
@@ -102,7 +101,8 @@ app.post("/api/scrape", async (req, res) => {
 
     // Set up fetch abort timeout
     const controller = new AbortController();
-    const timeoutMs = Math.min(Math.max((Number(timeoutSeconds) || 15) * 1000, 3000), 45000);
+    const maxAllowedTimeout = process.env.VERCEL ? 8500 : 45000; // Vercel hobby limits to 10s
+    const timeoutMs = Math.min(Math.max((Number(timeoutSeconds) || 15) * 1000, 3000), maxAllowedTimeout);
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
     const headers: Record<string, string> = {
@@ -421,6 +421,7 @@ app.get("/api/proxy-download", async (req, res) => {
 // Vite Middleware for Dev and Static for Prod
 async function startServer() {
   if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
