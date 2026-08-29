@@ -38,12 +38,12 @@ st.markdown("""
 <style>
     .main .block-container { padding-top: 2rem; padding-bottom: 3rem; max-width: 1200px; }
     .app-header {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid #334155; border-radius: 12px;
-        padding: 1.5rem 2rem; margin-bottom: 1.5rem; color: #f8fafc;
+        background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        border: 1px solid #cbd5e1; border-radius: 12px;
+        padding: 1.5rem 2rem; margin-bottom: 1.5rem; color: #0f172a;
     }
     .app-title { font-size: 1.8rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 0.75rem; }
-    .app-subtitle { color: #94a3b8; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0; }
+    .app-subtitle { color: #475569; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0; }
 </style>
 """, unsafe_allow_html=True)
 

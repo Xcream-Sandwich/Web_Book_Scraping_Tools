@@ -1,25 +1,29 @@
 import React from "react";
-import { BookOpen, Code2, Globe, Sparkles, Layers, Terminal, Sun, Moon } from "lucide-react";
+import { Layers, Sun, Moon } from "lucide-react";
 
 interface HeaderProps {
-  activeTab: "scraper" | "pythonCode";
-  onTabChange: (tab: "scraper" | "pythonCode") => void;
   isLoading?: boolean;
   queueCount?: number;
   onOpenQueue?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  activeTab,
-  onTabChange,
   isLoading = false,
   queueCount = 0,
   onOpenQueue,
 }) => {
-  const [isDark, setIsDark] = React.useState(true);
+  const [isDark, setIsDark] = React.useState(false);
 
   React.useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
+    const savedTheme = localStorage.getItem('theme');
+    const root = document.documentElement;
+    if (savedTheme === 'dark') {
+      root.classList.add('dark');
+      setIsDark(true);
+    } else {
+      root.classList.remove('dark');
+      setIsDark(false);
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -56,7 +60,6 @@ export const Header: React.FC<HeaderProps> = ({
               <p className="text-xs text-zinc-500 dark:text-zinc-400">Advanced Directory Scraping Engine v2.4</p>
             </div>
           </div>
-
           {/* Mobile status pill */}
           <div className="flex md:hidden items-center gap-1.5">
             <div className={`px-2.5 py-1 rounded-full text-[10px] font-mono border ${
@@ -69,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Status Pills & Navigation Tabs */}
+        {/* Status Pills & Controls */}
         <div className="flex flex-wrap items-center justify-end gap-2.5 w-full md:w-auto">
           {/* Bento Status Pills */}
           <div className="hidden lg:flex items-center gap-2">
@@ -103,42 +106,11 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700"
+            className="p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 ml-2"
             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-
-          {/* Bento Tabs */}
-          <div className="flex items-center bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1 rounded-xl shadow-sm dark:shadow-inner">
-            <button
-              id="tab-interactive-scraper"
-              onClick={() => onTabChange("scraper")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                activeTab === "scraper"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800/60"
-              }`}
-            >
-              <Globe className="w-3.5 h-3.5" />
-              <span>Interactive Scraper</span>
-            </button>
-            <button
-              id="tab-python-code"
-              onClick={() => onTabChange("pythonCode")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                activeTab === "pythonCode"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800/60"
-              }`}
-            >
-              <Code2 className="w-3.5 h-3.5" />
-              <span className="flex items-center gap-1.5">
-                Python Source
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              </span>
-            </button>
-          </div>
         </div>
       </div>
     </header>

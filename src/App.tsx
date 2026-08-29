@@ -4,7 +4,6 @@ import { ScraperControls } from "./components/ScraperControls";
 import { BentoTopMetrics, BentoDistributionCard, BentoTerminalLog } from "./components/StatsCards";
 import { ResultsTable } from "./components/ResultsTable";
 import { EmptyOrErrorState } from "./components/EmptyOrErrorState";
-import { PythonCodeViewer } from "./components/PythonCodeViewer";
 import { DownloadQueueDrawer } from "./components/DownloadQueueDrawer";
 import { useDownloadQueue } from "./hooks/useDownloadQueue";
 import { ScrapeResponse, ScrapedFile } from "./types";
@@ -16,7 +15,6 @@ interface TerminalLogEntry {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"scraper" | "pythonCode">("scraper");
   const [url, setUrl] = useState<string>("");
   const [selectedExts, setSelectedExts] = useState<string[]>(["pdf", "epub", "mobi", "cbz"]);
   const [timeoutSec, setTimeoutSec] = useState<number>(15);
@@ -47,8 +45,8 @@ export default function App() {
   } = useDownloadQueue();
 
   useEffect(() => {
-    // Check if user has explicit preference, otherwise default to dark mode
-    const isDark = localStorage.getItem('theme') === 'light' ? false : true;
+    // Check if user has explicit preference, otherwise default to light mode
+    const isDark = localStorage.getItem('theme') === 'dark' ? true : false;
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
@@ -126,8 +124,6 @@ export default function App() {
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans selection:bg-indigo-500/30 dark:selection:bg-indigo-500 selection:text-indigo-900 dark:selection:text-white">
       {/* Bento Header */}
       <Header
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
         isLoading={isLoading}
         queueCount={queue.length}
         onOpenQueue={() => setIsQueueOpen(true)}
@@ -135,9 +131,8 @@ export default function App() {
 
       {/* Main Bento Grid Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
-        {activeTab === "scraper" ? (
-          <div className="space-y-4">
-            {/* Top Bento Row: Controls + Quick Metrics */}
+        <div className="space-y-4">
+          {/* Top Bento Row: Controls + Quick Metrics */}
             <div className="grid grid-cols-12 gap-4 items-stretch">
               {/* Controls Bento Card (Span 8) */}
               <div className="col-span-12 lg:col-span-8 flex flex-col">
@@ -221,10 +216,6 @@ export default function App() {
               </div>
             </div>
           </div>
-        ) : (
-          /* Python Code & Streamlit Source Tab */
-          <PythonCodeViewer />
-        )}
       </main>
 
       {/* Download Queue Drawer / Modal */}
