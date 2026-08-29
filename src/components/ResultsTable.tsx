@@ -264,16 +264,16 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
     if (e === "mobi" || e === "azw3") return "bg-orange-500/10 text-orange-400 border border-orange-500/20";
     if (e === "cbz" || e === "cbr") return "bg-purple-500/10 text-purple-400 border border-purple-500/20";
     if (e === "djvu") return "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20";
-    return "bg-zinc-800 text-zinc-300 border border-zinc-700";
+    return "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-300 dark:border-zinc-700";
   };
 
   return (
-    <div className="bg-zinc-900/30 border border-zinc-800 rounded-xl flex flex-col overflow-hidden">
+    <div className="bg-zinc-50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl flex flex-col overflow-hidden">
       {/* Bento Header */}
-      <div className="p-4 border-b border-zinc-800 bg-zinc-900/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-zinc-100">Scanned Assets List</h3>
-          <span className="px-2 py-0.5 bg-zinc-800 rounded text-[10px] text-zinc-400 font-mono">
+          <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Scanned Assets List</h3>
+          <span className="px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded text-[10px] text-zinc-500 dark:text-zinc-400 font-mono">
             {processedFiles.length} / {files.length} items
           </span>
           {isRecursive && (
@@ -288,7 +288,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
             <select
               value={selectedFolder}
               onChange={(e) => handleFilterChange(() => setSelectedFolder(e.target.value))}
-              className="bg-zinc-950 text-xs px-2.5 py-1 rounded-lg border border-zinc-800 text-zinc-300 focus:outline-none focus:border-indigo-500 max-w-[200px] truncate"
+              className="bg-white dark:bg-zinc-950 text-xs px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 focus:outline-none focus:border-indigo-500 max-w-[200px] truncate"
             >
               <option value="ALL">All Folders ({availableFolders.length - 1})</option>
               {availableFolders.filter((f) => f !== "ALL").map((folder) => (
@@ -298,24 +298,24 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
               ))}
             </select>
           )}
-          <span className="px-2 py-0.5 bg-zinc-800 rounded text-[10px] text-zinc-400">
+          <span className="px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded text-[10px] text-zinc-500 dark:text-zinc-400">
             Sort: {sortField.toUpperCase()} {sortDirection.toUpperCase()}
           </span>
         </div>
       </div>
 
       {/* Filter & Toolbar Row */}
-      <div className="p-3 border-b border-zinc-800/80 bg-zinc-950/40 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
+      <div className="p-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/40 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
         {/* Search */}
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-zinc-400" />
           <input
             id="table-search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => handleFilterChange(() => setSearchQuery(e.target.value))}
             placeholder="Search document name, folder, or URL..."
-            className="w-full bg-zinc-950 text-xs pl-8 pr-3 py-1.5 rounded-lg border border-zinc-800 focus:border-indigo-500 focus:outline-none text-zinc-200 placeholder:text-zinc-500"
+            className="w-full bg-white dark:bg-zinc-950 text-xs pl-8 pr-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 focus:outline-none text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-500 dark:text-zinc-400"
           />
         </div>
 
@@ -328,7 +328,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
               className={`text-[11px] px-2 py-1 rounded-md font-semibold transition border ${
                 selectedFormat === fmt
                   ? "bg-indigo-600 text-white border-indigo-500"
-                  : "bg-zinc-900/80 text-zinc-400 border-zinc-800 hover:text-zinc-200 hover:bg-zinc-800/60"
+                  : "bg-zinc-50 dark:bg-zinc-900/80 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800/60"
               }`}
             >
               {fmt === "ALL" ? "All Formats" : fmt}
@@ -376,7 +376,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
           <button
             onClick={handleDownloadZip}
             disabled={isZipping || processedFiles.length === 0}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-medium transition disabled:opacity-50"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs font-medium transition disabled:opacity-50"
             title="Download ZIP"
           >
             {isZipping ? (
@@ -400,7 +400,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs transition"
+            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs transition"
             title="Export CSV"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
@@ -409,7 +409,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
           <button
             onClick={handleExportTXT}
-            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs transition"
+            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs transition"
             title="Export TXT Links"
           >
             <FileText className="w-3.5 h-3.5 text-sky-400" />
@@ -418,13 +418,13 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
           <button
             onClick={handleCopyAllLinks}
-            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs transition"
+            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs transition"
             title="Copy all links"
           >
             {copiedAllLinks ? (
               <Check className="w-3.5 h-3.5 text-emerald-400" />
             ) : (
-              <Copy className="w-3.5 h-3.5 text-zinc-400" />
+              <Copy className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
             )}
           </button>
         </div>
@@ -452,7 +452,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
             )}
             <button
               onClick={() => setSelectedUrls(new Set())}
-              className="text-zinc-400 hover:text-zinc-200 text-[11px] underline"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200 text-[11px] underline"
             >
               Clear selection
             </button>
@@ -463,12 +463,12 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
       {/* Bento Table */}
       <div className="flex-grow overflow-auto max-h-[520px]">
         <table className="w-full text-left border-collapse">
-          <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-10">
-            <tr className="text-zinc-500 text-[11px] uppercase tracking-wider font-mono">
+          <thead className="sticky top-0 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 z-10">
+            <tr className="text-zinc-500 dark:text-zinc-400 text-[11px] uppercase tracking-wider font-mono">
               <th className="px-3 py-3 w-10 text-center">
                 <button
                   onClick={toggleSelectAll}
-                  className="text-zinc-500 hover:text-zinc-300 transition"
+                  className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 transition"
                   title="Select all"
                 >
                   {selectedUrls.size === processedFiles.length && processedFiles.length > 0 ? (
@@ -487,7 +487,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     setSortDirection("asc");
                   }
                 }}
-                className="px-4 py-3 font-medium cursor-pointer hover:text-zinc-300 transition"
+                className="px-4 py-3 font-medium cursor-pointer hover:text-zinc-600 dark:text-zinc-400 transition"
               >
                 <div className="flex items-center gap-1.5">
                   <span>File Name</span>
@@ -503,7 +503,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     setSortDirection("asc");
                   }
                 }}
-                className="px-4 py-3 font-medium w-40 cursor-pointer hover:text-zinc-300 transition"
+                className="px-4 py-3 font-medium w-40 cursor-pointer hover:text-zinc-600 dark:text-zinc-400 transition"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Subdirectory</span>
@@ -519,7 +519,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     setSortDirection("asc");
                   }
                 }}
-                className="px-4 py-3 font-medium w-20 cursor-pointer hover:text-zinc-300 transition"
+                className="px-4 py-3 font-medium w-20 cursor-pointer hover:text-zinc-600 dark:text-zinc-400 transition"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Type</span>
@@ -535,7 +535,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     setSortDirection("asc");
                   }
                 }}
-                className="px-4 py-3 font-medium text-right w-24 cursor-pointer hover:text-zinc-300 transition"
+                className="px-4 py-3 font-medium text-right w-24 cursor-pointer hover:text-zinc-600 dark:text-zinc-400 transition"
               >
                 <div className="flex items-center justify-end gap-1.5">
                   <span>Size</span>
@@ -548,7 +548,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
           <tbody className="divide-y divide-zinc-800/50 text-sm">
             {paginatedFiles.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-12 text-center text-zinc-500 text-xs">
+                <td colSpan={6} className="py-12 text-center text-zinc-500 dark:text-zinc-400 text-xs">
                   No files matched the search query or extension filters.
                 </td>
               </tr>
@@ -558,7 +558,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                 return (
                   <tr
                     key={file.url + idx}
-                    className={`hover:bg-zinc-800/30 transition-colors ${
+                    className={`hover:bg-zinc-100 dark:bg-zinc-800/30 transition-colors ${
                       isSelected ? "bg-indigo-950/20" : ""
                     }`}
                   >
@@ -566,7 +566,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     <td className="px-3 py-2.5 text-center">
                       <button
                         onClick={() => toggleSelectFile(file.url)}
-                        className="text-zinc-500 hover:text-zinc-300 transition"
+                        className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 transition"
                       >
                         {isSelected ? (
                           <CheckSquare className="w-3.5 h-3.5 text-indigo-400" />
@@ -579,10 +579,10 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     {/* File Name & Path */}
                     <td className="px-4 py-2.5">
                       <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-zinc-200 hover:text-indigo-300 transition text-xs">
+                        <span className="font-medium text-zinc-800 dark:text-zinc-200 hover:text-indigo-300 transition text-xs">
                           {file.name}
                         </span>
-                        <span className="text-[10px] text-zinc-500 truncate max-w-xs sm:max-w-md font-mono">
+                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate max-w-xs sm:max-w-md font-mono">
                           {file.url}
                         </span>
                       </div>
@@ -590,7 +590,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
                     {/* Folder / Bundle */}
                     <td className="px-4 py-2.5">
-                      <span className="text-[11px] text-zinc-400 bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800/80 font-mono truncate max-w-[140px] inline-block" title={file.folder || "Root"}>
+                      <span className="text-[11px] text-zinc-500 dark:text-zinc-400 bg-white dark:bg-zinc-950 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-800/80 font-mono truncate max-w-[140px] inline-block" title={file.folder || "Root"}>
                         {file.folder || "Root"}
                       </span>
                     </td>
@@ -603,7 +603,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                     </td>
 
                     {/* Size */}
-                    <td className="px-4 py-2.5 text-right font-mono text-xs text-zinc-400">
+                    <td className="px-4 py-2.5 text-right font-mono text-xs text-zinc-500 dark:text-zinc-400">
                       {file.size}
                     </td>
 
@@ -613,7 +613,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                         {/* Copy URL */}
                         <button
                           onClick={() => handleCopyLink(file.url)}
-                          className="text-zinc-500 hover:text-zinc-300 transition p-1"
+                          className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 transition p-1"
                           title="Copy Link"
                         >
                           {copiedUrl === file.url ? (
@@ -628,7 +628,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                           href={file.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-zinc-500 hover:text-zinc-300 transition p-1"
+                          className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 transition p-1"
                           title="Open Link in New Tab"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -638,7 +638,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                         {onAddToQueue && (
                           <button
                             onClick={() => onAddToQueue([file])}
-                            className="text-zinc-400 hover:text-indigo-300 transition p-1"
+                            className="text-zinc-500 dark:text-zinc-400 hover:text-indigo-300 transition p-1"
                             title="Add to Download Queue"
                           >
                             <ListPlus className="w-3.5 h-3.5 inline" />
@@ -665,7 +665,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
       {/* Pagination Footer */}
       {processedFiles.length > pageSize && (
-        <div className="p-3 border-t border-zinc-800 bg-zinc-900/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-400">
+        <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-500 dark:text-zinc-400">
           <div>
             Showing {(currentPage - 1) * pageSize + 1} -{" "}
             {Math.min(currentPage * pageSize, processedFiles.length)} of {processedFiles.length} items
@@ -674,18 +674,18 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 disabled:opacity-40 transition flex items-center gap-1"
+              className="px-2.5 py-1 rounded bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:bg-zinc-800 disabled:opacity-40 transition flex items-center gap-1"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
               Prev
             </button>
-            <span className="font-mono text-zinc-300 px-2">
+            <span className="font-mono text-zinc-600 dark:text-zinc-400 px-2">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 disabled:opacity-40 transition flex items-center gap-1"
+              className="px-2.5 py-1 rounded bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:bg-zinc-800 disabled:opacity-40 transition flex items-center gap-1"
             >
               Next
               <ChevronRight className="w-3.5 h-3.5" />

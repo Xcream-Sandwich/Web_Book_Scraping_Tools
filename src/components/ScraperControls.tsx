@@ -83,11 +83,11 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
   };
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 sm:p-5 flex flex-col gap-4">
+    <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 sm:p-5 flex flex-col gap-4">
       {/* Target URL Input Area + Execute Scrape */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         <div className="flex-grow relative">
-          <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-zinc-500">
+          <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-zinc-500 dark:text-zinc-400">
             <Search className="w-4 h-4" />
           </div>
           <input
@@ -98,13 +98,13 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
             onKeyDown={handleKeyDown}
             placeholder="Masukkan URL direktori web target (e.g. https://archive.org/download/...)"
             disabled={isLoading}
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-10 pr-10 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition duration-150 disabled:opacity-50 font-mono text-xs sm:text-sm"
+            className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg pl-10 pr-10 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 dark:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition duration-150 disabled:opacity-50 font-mono text-xs sm:text-sm"
           />
           {url && !isLoading && (
             <button
               id="btn-clear-url"
               onClick={() => setUrl("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800 transition"
               title="Clear URL"
             >
               <X className="w-3.5 h-3.5" />
@@ -136,10 +136,10 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
       </div>
 
       {/* Extension Filters & Format Quick Selectors */}
-      <div className="pt-2 border-t border-zinc-800/80 space-y-2.5">
+      <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800/80 space-y-2.5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-[11px] uppercase tracking-wider font-semibold text-zinc-400">
+            <span className="text-[11px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
               Target Formats:
             </span>
             {isAllSelected && (
@@ -153,32 +153,32 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
               type="button"
               onClick={selectAllMode}
               className={`px-2 py-0.5 rounded transition font-medium ${
-                isAllSelected ? "bg-indigo-600 text-white" : "text-zinc-400 hover:text-indigo-300 bg-zinc-950 border border-zinc-800"
+                isAllSelected ? "bg-indigo-600 text-white" : "text-zinc-500 dark:text-zinc-400 hover:text-indigo-300 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800"
               }`}
             >
               🌟 Scan Semua Format (*.*)
             </button>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-400 dark:text-zinc-700">•</span>
             <button
               type="button"
               onClick={selectDefaultExts}
-              className="text-zinc-500 hover:text-indigo-400 transition"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-indigo-400 transition"
             >
               Default (PDF, EPUB, ZIP, MOBI, CBZ)
             </button>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-400 dark:text-zinc-700">•</span>
             <button
               type="button"
               onClick={selectEbooksOnly}
-              className="text-zinc-500 hover:text-indigo-400 transition"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-indigo-400 transition"
             >
               E-Books Only
             </button>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-400 dark:text-zinc-700">•</span>
             <button
               type="button"
               onClick={selectArchivesOnly}
-              className="text-zinc-500 hover:text-indigo-400 transition"
+              className="text-zinc-500 dark:text-zinc-400 hover:text-indigo-400 transition"
             >
               Archives (ZIP/RAR)
             </button>
@@ -198,11 +198,11 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
                   isSelected
                     ? `${item.badgeBg} ${item.badgeBorder} ${item.badgeText} shadow-sm ring-1 ring-inset ring-current/20`
                     : isAllSelected
-                    ? "bg-zinc-900/60 text-zinc-400 border-zinc-800 opacity-60"
-                    : "bg-zinc-950 text-zinc-600 border-zinc-800 hover:border-zinc-700 hover:text-zinc-400"
+                    ? "bg-zinc-50 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 opacity-60"
+                    : "bg-white dark:bg-zinc-950 text-zinc-400 dark:text-zinc-600 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:border-zinc-700 hover:text-zinc-500 dark:text-zinc-400"
                 }`}
               >
-                <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? "bg-current" : "bg-zinc-700"}`} />
+                <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? "bg-current" : "bg-zinc-200 dark:bg-zinc-700"}`} />
                 <span>{item.label}</span>
               </button>
             );
@@ -215,7 +215,7 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
               value={customExtInput}
               onChange={(e) => setCustomExtInput(e.target.value)}
               placeholder="+ custom (e.g. azw)"
-              className="w-24 bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1 text-xs text-zinc-300 placeholder:text-zinc-600 focus:outline-none focus:border-indigo-500 font-mono"
+              className="w-24 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs text-zinc-600 dark:text-zinc-400 placeholder:text-zinc-400 dark:text-zinc-600 focus:outline-none focus:border-indigo-500 font-mono"
             />
             {customExtInput && (
               <button
@@ -230,24 +230,24 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
       </div>
 
       {/* Advanced Settings Toggle */}
-      <div className="pt-2 border-t border-zinc-800/80">
+      <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800/80">
         <div className="flex items-center justify-between text-xs">
           <button
             type="button"
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="text-zinc-500 hover:text-zinc-300 flex items-center gap-1.5 font-medium transition"
+            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5 font-medium transition"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>{showAdvanced ? "Hide Advanced Config" : "Timeout & Connection Settings"}</span>
           </button>
-          <span className="text-zinc-500 font-mono text-[11px]">
-            Timeout: <strong className="text-zinc-300">{timeoutSec}s</strong>
+          <span className="text-zinc-500 dark:text-zinc-400 font-mono text-[11px]">
+            Timeout: <strong className="text-zinc-600 dark:text-zinc-400">{timeoutSec}s</strong>
           </span>
         </div>
 
         {showAdvanced && (
-          <div className="mt-3 p-3.5 rounded-lg bg-zinc-950 border border-zinc-800 space-y-2 animate-fadeIn">
-            <div className="flex justify-between text-xs text-zinc-400">
+          <div className="mt-3 p-3.5 rounded-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 animate-fadeIn">
+            <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
               <span>Request Timeout (Seconds):</span>
               <span className="font-mono text-indigo-400 font-semibold">{timeoutSec}s</span>
             </div>
@@ -258,9 +258,9 @@ export const ScraperControls: React.FC<ScraperControlsProps> = ({
               step={5}
               value={timeoutSec}
               onChange={(e) => setTimeoutSec(Number(e.target.value))}
-              className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+              className="w-full h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
             />
-            <div className="flex justify-between text-[10px] text-zinc-600 font-mono">
+            <div className="flex justify-between text-[10px] text-zinc-400 dark:text-zinc-600 font-mono">
               <span>5s (Fast)</span>
               <span>15s (Recommended)</span>
               <span>45s (Deep Scan)</span>

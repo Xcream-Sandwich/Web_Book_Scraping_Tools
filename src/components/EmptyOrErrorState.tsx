@@ -40,12 +40,12 @@ export const EmptyOrErrorState: React.FC<EmptyOrErrorStateProps> = ({
           </p>
         </div>
 
-        <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-3.5 max-w-md mx-auto text-left text-xs space-y-2">
-          <span className="font-semibold text-zinc-300 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+        <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg p-3.5 max-w-md mx-auto text-left text-xs space-y-2">
+          <span className="font-semibold text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
             <HelpCircle className="w-3.5 h-3.5 text-amber-400" />
             Troubleshooting Steps:
           </span>
-          <ul className="list-disc list-inside text-zinc-400 space-y-1 text-[11px]">
+          <ul className="list-disc list-inside text-zinc-500 dark:text-zinc-400 space-y-1 text-[11px]">
             {isTimeout && <li>Increase request timeout slider to 30–45 seconds.</li>}
             {isForbidden && <li>Target web directory strictly forbids automated user-agents.</li>}
             <li>Check that the URL has protocol prefix (<code>http://</code> or <code>https://</code>).</li>
@@ -56,7 +56,7 @@ export const EmptyOrErrorState: React.FC<EmptyOrErrorStateProps> = ({
         {onRetry && (
           <button
             onClick={onRetry}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-semibold border border-zinc-800 transition"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-semibold border border-zinc-200 dark:border-zinc-800 transition"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Retry Connection</span>
@@ -68,14 +68,14 @@ export const EmptyOrErrorState: React.FC<EmptyOrErrorStateProps> = ({
 
   if (type === "empty") {
     return (
-      <div className="bg-zinc-900/40 border border-zinc-800 rounded-xl p-8 text-center space-y-4">
+      <div className="bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl p-8 text-center space-y-4">
         <div className="mx-auto w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
           <FileQuestion className="w-5 h-5" />
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-zinc-200">No Matching Files Found</h3>
-          <p className="text-xs text-zinc-400 mt-1 max-w-md mx-auto">
+          <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">No Matching Files Found</h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-md mx-auto">
             Directory scanned successfully, but no document links with the active format extensions were found.
           </p>
         </div>
@@ -89,12 +89,12 @@ export const EmptyOrErrorState: React.FC<EmptyOrErrorStateProps> = ({
 
   // Initial State
   return (
-    <div className="bg-zinc-900/30 border border-zinc-800 rounded-xl p-6 text-center space-y-4">
+    <div className="bg-zinc-50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center space-y-4">
       <div className="max-w-xl mx-auto space-y-1.5">
-        <h3 className="text-base font-bold text-zinc-100 tracking-tight">
+        <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
           Ready to Scan Directory
         </h3>
-        <p className="text-xs text-zinc-400 leading-relaxed">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
           Input an open web directory URL to scan and extract documents (<span className="text-indigo-400 font-mono">.pdf, .epub, .mobi, .cbz, dll</span>).
         </p>
       </div>

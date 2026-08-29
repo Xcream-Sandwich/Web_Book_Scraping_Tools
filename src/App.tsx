@@ -46,6 +46,16 @@ export default function App() {
     toggleQueue,
   } = useDownloadQueue();
 
+  useEffect(() => {
+    // Check if user has explicit preference, otherwise default to dark mode
+    const isDark = localStorage.getItem('theme') === 'light' ? false : true;
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   const addLog = (level: "INFO" | "SUCCESS" | "BS4" | "WARN" | "ERROR", text: string) => {
     const now = new Date();
     const timeStr = now.toTimeString().split(" ")[0];
@@ -113,7 +123,7 @@ export default function App() {
   const activeFiles = scrapeResult?.files || [];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans selection:bg-indigo-500/30 dark:selection:bg-indigo-500 selection:text-indigo-900 dark:selection:text-white">
       {/* Bento Header */}
       <Header
         activeTab={activeTab}
@@ -161,16 +171,16 @@ export default function App() {
               {/* Left/Main Column: Scanned Assets Table / Loading / Errors (Span 8 or 9) */}
               <div className="col-span-12 lg:col-span-8 xl:col-span-9 space-y-4">
                 {isLoading ? (
-                  <div className="bg-zinc-900/40 border border-zinc-800 rounded-xl p-10 text-center space-y-4">
+                  <div className="bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl p-10 text-center space-y-4">
                     <div className="relative mx-auto w-12 h-12">
                       <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20 animate-ping" />
                       <div className="w-12 h-12 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-zinc-100">
+                      <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
                         Executing Directory Scraping...
                       </h3>
-                      <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto font-mono">
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-md mx-auto font-mono">
                         Sending GET request, extracting anchor DOM nodes via BeautifulSoup, parsing .{selectedExts.join(", .")} assets across root and subfolders.
                       </p>
                     </div>
@@ -235,8 +245,8 @@ export default function App() {
       />
 
       {/* Bento Footer */}
-      <footer className="border-t border-zinc-800 bg-zinc-950/80 py-3.5 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-zinc-500 font-mono">
+      <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/80 py-3.5 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">
           <p>© 2026 DOCSCOUT • Built with Requests & BeautifulSoup4</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
